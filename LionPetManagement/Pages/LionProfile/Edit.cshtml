@@ -1,0 +1,32 @@
+@page
+@model LionPetManagement.Pages.LionProfile.EditModel
+
+<h2>Sửa LionProfile</h2>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <p style="color:red">@Model.Error</p>
+}
+
+<form method="post">
+    <input type="hidden" asp-for="Form.LionProfileId" />
+    <label>Loại:</label>
+    <select asp-for="Form.LionTypeId" asp-items="Model.LionTypeOptions"></select>
+    <br />
+    <label>Tên:</label>
+    <input asp-for="Form.LionName" />
+    <br />
+    <label>Weight:</label>
+    <input asp-for="Form.Weight" type="number" step="any" />
+    <br />
+    <label>Characteristics:</label>
+    <input asp-for="Form.Characteristics" />
+    <br />
+    <label>Warning:</label>
+    <input asp-for="Form.Warning" />
+    <br />
+    <button type="submit">Lưu</button>
+    <a href="/LionProfile/Index">Hủy</a>
+</form>
+
+ 

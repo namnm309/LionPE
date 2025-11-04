@@ -1,0 +1,86 @@
+﻿@page
+@model LionPetManagement.Pages.LionProfile.IndexModel
+
+<h2>Danh sách LionProfile</h2>
+
+@*Filter*@
+<form method="get">
+    <label>Weight:</label>
+    <input type="number" step="any" name="Weight" value="@Model.Weight" />
+    <label>Loại (tên):</label>
+    <input type="text" name="LionTypeName" value="@Model.LionTypeName" />
+    <button type="submit">Tìm</button>
+    <a href="?">Xóa lọc</a>
+</form>
+
+<p>Tổng số: @Model.LionProfileData.TotalRecords</p>
+
+@*Table*@
+<table  border="1" cellspacing="0" cellpadding="6" >
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>LionTypeId</th>
+            <th>LionTypeName</th>
+            <th>LionName</th>
+            <th>Weight</th>
+            <th>Characteristics</th>
+            <th>Warning</th>
+            <th>ModifiedDate</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var lion in Model.LionProfileData.LionProfileList)
+    {
+        <tr>
+            <td>@lion.LionProfileId</td>
+            <td>@lion.LionTypeId</td>
+            <td>@(lion.LionType?.LionTypeName ?? "-")</td>
+            <td>@lion.LionName</td>
+            <td>@lion.Weight</td>
+            <td>@lion.Characteristics</td>
+            <td>@lion.Warning</td>
+            <td>@lion.ModifiedDate.ToString("dd/MM/yyyy")</td>
+            <td>
+                <a href="/LionProfile/Create">Thêm</a>
+                | <a href="/LionProfile/Edit?id=@lion.LionProfileId">Sửa</a>
+                | <form method="post" asp-page-handler="Delete" asp-route-id="@lion.LionProfileId" style="display:inline">
+                    <button type="submit" onclick="return confirm('Xóa mục này?');">Xóa</button>
+                  </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+    </table>
+
+@*Chuyển trang*@
+<div @* style="margin-top:10px;" *@>
+    @if (Model.LionProfileData.CurrentPage > 1)
+    {
+        <a href="?pageIndex=@(Model.LionProfileData.CurrentPage - 1)">Trước</a>
+    }
+    else
+    {
+        <span>Trước</span>
+    }
+
+    <span @* style="margin:0 8px;" *@>Trang @Model.LionProfileData.CurrentPage / @Model.LionProfileData.TotalPages</span>
+
+    @if (Model.LionProfileData.CurrentPage < Model.LionProfileData.TotalPages)
+    {
+        <a href="?pageIndex=@(Model.LionProfileData.CurrentPage + 1)">Sau</a>
+    }
+    else
+    {
+        <span>Sau</span>
+    }
+</div>
+
+@*SingalR*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder().withUrl("/lionHub").build();
+    connection.on("Deleted", () => { window.location.reload(); });
+    connection.start();
+</script>
