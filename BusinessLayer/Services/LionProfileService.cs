@@ -51,6 +51,7 @@ namespace BusinessLayer.Services
         }
 
         public async Task<LionProfileDTO> CreateAsync(LionProfileDTO request)
+
         {
             ValidateRequest(request);
 
@@ -67,7 +68,7 @@ namespace BusinessLayer.Services
             return MapToDto(created);
         }
 
-        //Search = Id để sp cho method Edit
+        //Search = Id để sp cho method Edit và Detail
         public async Task<LionProfileDTO?> GetByIdAsync(int id)
         {
             var entity = await _repo.GetByIdAsync(id);
@@ -109,7 +110,7 @@ namespace BusinessLayer.Services
         //tạo dropdown liontype cho Create và Edit 
         public Task<List<DataAccessLayer.Models.LionType>> GetLionTypesAsync() => _repo.GetLionTypesAsync();
 
-        //Regex xài chung
+        //Regex xài chung cho Create và Edit
         private static void ValidateRequest(LionProfileDTO request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));

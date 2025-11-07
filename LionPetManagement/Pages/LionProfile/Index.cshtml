@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model LionPetManagement.Pages.LionProfile.IndexModel
 
 <h2>Danh sách LionProfile</h2>
@@ -45,6 +45,7 @@
             <td>
                 <a href="/LionProfile/Create">Thêm</a>
                 | <a href="/LionProfile/Edit?id=@lion.LionProfileId">Sửa</a>
+                | <a href="/LionProfile/Detail?id=@lion.LionProfileId">Chi tiết</a>
                 | <form method="post" asp-page-handler="Delete" asp-route-id="@lion.LionProfileId" style="display:inline">
                     <button type="submit" onclick="return confirm('Xóa mục này?');">Xóa</button>
                   </form>

@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Models;
+using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +26,4 @@ namespace BusinessLayer.DTOs
         public virtual LionType LionType { get; set; } 
     }
 
-    public class LionProfileListResponse
-    {
-        public List<LionProfileDTO> LionProfileList { get; set; } = new();
-        public int CurrentPage { get; set; }
-        public int TotalPages { get; set; }
-        public int TotalRecords { get; set; }
-        public int PageSize { get; set; }
-    }
 }

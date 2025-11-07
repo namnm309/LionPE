@@ -1,0 +1,27 @@
+@page
+@model LionPetManagement.Pages.LionProfile.DetailModel
+
+<h2>Chi tiết LionProfile</h2>
+
+@if (Model.Item == null)
+{
+    <p>Không tìm thấy.</p>
+}
+else
+{
+    <div>
+        <p><strong>ID:</strong> @Model.Item.LionProfileId</p>
+        <p><strong>Loại:</strong> @(Model.Item.LionType?.LionTypeName ?? Model.Item.LionTypeId.ToString())</p>
+        <p><strong>Tên:</strong> @Model.Item.LionName</p>
+        <p><strong>Weight:</strong> @Model.Item.Weight</p>
+        <p><strong>Characteristics:</strong> @Model.Item.Characteristics</p>
+        <p><strong>Warning:</strong> @Model.Item.Warning</p>
+        <p><strong>ModifiedDate:</strong> @Model.Item.ModifiedDate.ToString("dd/MM/yyyy")</p>
+    </div>
+}
+
+<p>
+    <a href="/LionProfile/Index">Quay lại</a>
+</p>
+
+
