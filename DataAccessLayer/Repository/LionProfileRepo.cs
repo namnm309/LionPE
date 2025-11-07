@@ -65,6 +65,7 @@ namespace DataAccessLayer.Repository
             }
         }
 
+        //search ra r pagination
         public async Task<(List<LionProfile> items, int totalCount)> SearchAsync(int pageIndex, int pageSize, double? weight, string? lionTypeName)
         {
             var baseQuery = _context.LionProfiles.Include(x => x.LionType).AsQueryable();
@@ -93,6 +94,7 @@ namespace DataAccessLayer.Repository
             return (items, totalCount);
         }
 
+        //Tra ra full bang LionType dropdown
         public async Task<List<LionType>> GetLionTypesAsync()
         {
             return await _context.LionTypes.OrderBy(x => x.LionTypeName).ToListAsync();

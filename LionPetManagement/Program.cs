@@ -29,12 +29,7 @@ namespace LionPetManagement
             builder.Services.AddScoped<LionProfileService>(); 
 
             //Thêm coookie để lưu session và timeout
-            builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
